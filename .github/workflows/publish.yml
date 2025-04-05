@@ -32,7 +32,9 @@ jobs:
             type=semver,pattern={{version}},value=v${{ inputs.version }}
             type=raw,value=latest
             type=raw,value=latest-${{ github.sha }}
-      - run: echo $(pwd)
+      - run: |
+          echo $(pwd)
+          echo $(ls -la)
         name: Print working directory
       - uses: docker/build-push-action@v3
         with:
