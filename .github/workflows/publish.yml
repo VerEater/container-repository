@@ -9,6 +9,9 @@ env:
   name: test
 jobs:
   publish:
+    defaults:
+      run:
+        shell: bash
     permissions:
       contents: read
       packages: write
@@ -29,6 +32,8 @@ jobs:
             type=semver,pattern={{version}},value=v${{ inputs.version }}
             type=raw,value=latest
             type=raw,value=latest-${{ github.sha }}
+      - run: echo $(pwd)
+        name: Print working directory
       - uses: docker/build-push-action@v3
         with:
           push: true
